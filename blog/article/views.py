@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect
+from flask_login import login_required
 from werkzeug.exceptions import NotFound
 
 article = Blueprint('article', __name__, url_prefix='/articles', static_folder='../static')
@@ -23,6 +24,7 @@ ARTICLES = {
 
 
 @article.route('/')
+@login_required
 def article_list():
     return render_template(
         'articles/list.html',
@@ -31,6 +33,7 @@ def article_list():
 
 
 @article.route('/<int:pk>')
+@login_required
 def get_article(pk: int):
     try:
         article_name = ARTICLES[pk]
