@@ -1,13 +1,15 @@
+import os
 
-class Config(object):
-    DEBUG = False
-
-
-class DevelopmentConfig(Config):
-
-    FLASK_DEBUG = True
-    DATABASE_URI = 'sqlite:////tmp/blog.db'
-    TESTING = True
-    SECRET_KEY = 'w3j&!3h0gzwtbf_jvy1byga*u9-*6xtznn0)&y(*a)yg*$k2@='
+from dotenv import load_dotenv
+from blog.enums import EnvType
 
 
+load_dotenv()
+
+ENV = os.getenv('FLASK_ENV', default=EnvType.production)
+DEBUG = ENV == EnvType.development
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
