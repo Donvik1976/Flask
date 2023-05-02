@@ -57,7 +57,7 @@ def user_list():
 @login_required
 def profile(pk: int):
     from blog.models import User
-    _user = User.query.filter_by(id=pk).one_or_none()
+    _user: User = User.query.filter_by(id=pk).one_or_none()
     if not _user:
         raise NotFound(f"User #{pk} doesn't exists!")
     return render_template(

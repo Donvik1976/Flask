@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Article detail
+    {{ article.title }}
 {% endblock %}
 {% block body %}
-    <h1>
-        {{ article_name['text'] }}
-        <a href="{{ url_for('user.profile', pk=article_name['author']) }}">
-            {{ article_name['author'] }}
-        </a>
-    </h1>
+    <h1>{{ article.title }}</h1>
+    <p>
+        {{ article.text }}
+    </p>
+    <div>Author: {{ article.author.user.first_name }} {{ article.author.user.last_name }} ({{ article.author.id }})</div>
+    <div>Created at: {{ article.created_at }}</div>
+    <div>Updated at: {{ article.updated_at }}</div>
 {% endblock %}
