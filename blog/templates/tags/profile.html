@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Tag detail
+{% endblock %}
+{% block body %}
+    <h1>
+        {{ tag.name }}
+    </h1>
+    {% for article in tag.articles %}
+        <ul>
+            <li>
+                <a href="{{ url_for('article.article_detail', article_id=article.id) }}">
+                    {{ article.title }}
+                </a>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}
