@@ -1,7 +1,7 @@
 from flask import Flask
 
 from blog import commands
-from blog.extensions import db, login_manager, migrate, csrf, admin
+from blog.extensions import db, login_manager, migrate, csrf, admin, api
 from blog.models import User
 
 
@@ -12,6 +12,7 @@ def create_app() -> Flask:
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)
+    register_api(app)
     return app
 
 
@@ -27,6 +28,15 @@ def register_extensions(app):
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+
+def register_api(app: Flask):
+    from blog.api.tag import TagList
+    from blog.api.tag import TagDetail
+
+    api.init_app(app)
+    api.route(TagList, 'tag_list', '/api/tags/', tag='Tag')
+    api.route(TagDetail, 'tag_detail', '/api/tags/<int:id>', tag='Tag')
 
 
 def register_blueprints(app: Flask):
