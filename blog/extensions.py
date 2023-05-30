@@ -1,4 +1,5 @@
 from flask_admin import Admin
+from flask_combo_jsonapi import Api
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,4 +17,4 @@ admin = Admin(
     template_mode='bootstrap4',
 )
 
-
+api = Api()
