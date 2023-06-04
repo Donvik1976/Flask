@@ -1,5 +1,9 @@
+from typing import Dict
+
+import requests
 from flask import Blueprint, render_template
 
+from blog.config import API_URL
 from blog.models import Author
 
 author = Blueprint('author', __name__, url_prefix='/authors', static_folder='../static')
@@ -8,6 +12,7 @@ author = Blueprint('author', __name__, url_prefix='/authors', static_folder='../
 @author.route('/')
 def author_list():
     authors = Author.query.all()
+
     return render_template(
         'authors/list.html',
         authors=authors,

@@ -8,7 +8,7 @@ from blog.schemas import AuthorSchema
 
 class AuthorDetailEvents(EventsResource):
 
-    def event_get_articles_count(self, **kwargs):
+    def event_get_articles_count(self, *args, **kwargs):
         return {"count": Article.query.filter(Article.author_id == kwargs["id"]).count()}
 
 

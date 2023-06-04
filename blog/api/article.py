@@ -9,7 +9,7 @@ from blog.schemas import ArticleSchema
 
 class ArticleListEvent(EventsResource):
 
-    def event_get_count(self):
+    def event_get_count(self, *args, **kwargs):
         return {'count': Article.query.count()}
 
     # def event_get_api_server(self):
@@ -18,7 +18,7 @@ class ArticleListEvent(EventsResource):
 
 class ArticleDetailEvent(EventsResource):
 
-    def event_get_count_by_author(self, **kwargs):
+    def event_get_count_by_author(self, *args, **kwargs):
         return {'count': Article.query.filter(Article.author_id == kwargs['id']).count()}
 
 
