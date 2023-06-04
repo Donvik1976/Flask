@@ -24,7 +24,6 @@ def article_list():
         'articles/list.html',
         articles=articles,
         count_articles=count_articles['count'],
-
     )
 
 
